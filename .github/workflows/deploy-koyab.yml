@@ -22,7 +22,7 @@ jobs:
         with:
           app-name: mikiko
           service-name: mikiko
-          service-type: web
+          service-type: worker
           service-env: ENV=prod,BOT_TOKEN=${{ secrets.BOT_TOKEN }},GUILD_ID=${{ secrets.GUILD_ID }}
           service-instance-type: free
           service-regions: fra
