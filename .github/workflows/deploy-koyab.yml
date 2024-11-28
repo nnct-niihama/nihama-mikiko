@@ -1,0 +1,28 @@
+name: Deploy to Koyeb
+
+on:
+  push:
+    branches:
+      - 'main'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    concurrency:
+      group: "${{ github.ref_name }}"
+      cancel-in-progress: true
+    steps:
+      - name: Install and configure the Koyeb CLI
+        uses: koyeb-community/koyeb-actions@v2
+        with:
+          api_token: "${{ secrets.KOYEB_API_TOKEN }}"
+
+      - name: Build and deploy the application to Koyeb
+        uses: koyeb/action-git-deploy@v1
+        with:
+          app-name: mikiko
+          service-name: mikiko
+          service-env: ENV=prod,DISCORD_TOKEN=${{ secrets.BOT_TOKEN }},GUILD_ID=${{ variables.GUILD_ID }}
+          service-ports: "80:http,8080:http"
+          service-routes: "/api:80,/docs:8080"
+          service-checks: "8000:http:/,8001:tcp"
