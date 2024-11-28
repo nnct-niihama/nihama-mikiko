@@ -15,6 +15,7 @@ import (
 
 // Bot parameters
 var (
+	Env      string
 	GuildID  string
 	BotToken string
 )
@@ -22,9 +23,12 @@ var (
 var s *discordgo.Session
 
 func init() {
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("error loading .env file")
+	Env = os.Getenv("ENV")
+	if Env != "prod" {
+		err := godotenv.Load()
+		if err != nil {
+			log.Fatal("error loading .env file")
+		}
 	}
 	GuildID = os.Getenv("GUILD_ID")
 	BotToken = os.Getenv("BOT_TOKEN")
