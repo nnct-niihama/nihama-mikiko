@@ -1,6 +1,6 @@
 module mikiko
 
-go 1.23.3
+go 1.23
 
 require (
 	github.com/bwmarrin/discordgo v0.28.1
