@@ -22,7 +22,7 @@ jobs:
         with:
           app-name: mikiko
           service-name: mikiko
-          service-env: ENV=prod,DISCORD_TOKEN=${{ secrets.BOT_TOKEN }},GUILD_ID=${{ variables.GUILD_ID }}
+          service-env: ENV=prod,DISCORD_TOKEN=${{ secrets.BOT_TOKEN }},GUILD_ID=${{ secrets.GUILD_ID }}
           service-ports: "80:http,8080:http"
           service-routes: "/api:80,/docs:8080"
           service-checks: "8000:http:/,8001:tcp"
